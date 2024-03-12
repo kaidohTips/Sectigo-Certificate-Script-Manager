@@ -222,4 +222,4 @@ Project Link: [SCSM](https://github.com/kaidohTips/Sectigo-Certificate-Script-Ma
 [issues-shield]: https://img.shields.io/github/issues/kaidohTips/Sectigo-Certificate-Script-Manager.svg?style=for-the-badge
 [issues-url]: https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager/issues
 [license-shield]: https://img.shields.io/github/license/kaidohTips/Sectigo-Certificate-Script-Manager.svg?style=for-the-badge
-[license-url]: https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager?tab=GPL-3.0-1-ov-file#
+[license-url]: https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager/blob/main/LICENSE

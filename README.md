@@ -134,6 +134,7 @@ At this point, you can:
 
 | Command    | Description                                |
 |------------|--------------------------------------------|
+| bind       | Test de connectivity with the Sectigo API   |
 | renew      | Renew the certificate                       |
 | info       | Display information of the current certificate |
 | download   | Download certificates (x509CO, x509IOR, and x509co) |

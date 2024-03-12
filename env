@@ -1,0 +1,11 @@
+##############################################
+# This is a template of my .env file.        #
+# PLEASE ! MODIFY THESE VARIABLE AS YOU NEED #
+##############################################
+
+SECTIGO_USER=""
+SECTIGO_CUSTOMER_URI=""
+SECTIGO_PASS=""
+
+SECTIGO_ORG_ID=""
+SECTIGO_CERT_TYPE_ID=""

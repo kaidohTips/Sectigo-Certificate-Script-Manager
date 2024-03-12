@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager">
-    <img src="lib/images/SCSM_logo.png" alt="Logo">
+    <img src="lib/images/SCSM_logo.png" alt="Logo" width="240" height="240">
   </a>
 
   <h3 align="center">Sectigo Certificate Script Manager</h3>

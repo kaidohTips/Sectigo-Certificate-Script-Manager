@@ -63,7 +63,9 @@
 
 ## Demo
 
-https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager/assets/77806690/5a95c7c9-8852-4c7d-87b2-43e364210871
+
+https://github.com/kaidohTips/Sectigo-Certificate-Script-Manager/assets/77806690/8cc35781-07fe-4b7f-a45d-dd7a27677deb
+
 
 <!-- ABOUT THE PROJECT -->
 ##  🧪 About The Project
@@ -135,7 +137,6 @@ At this point, you can:
 | renew      | Renew the certificate                       |
 | info       | Display information of the current certificate |
 | download   | Download certificates (x509CO, x509IOR, and x509co) |
-| deploy     | Deploy the certificate automatically       |
 | create     | Create a certificate                        |
 | update     | Update a certificate                        |
 
@@ -151,7 +152,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## 🔖Roadmap
 
 - [x] Add 'update' command.
-- [ ] CI/CD Pipeline to automatically deploy the certificate in your web server.
+- [ ] Add 'deploy' command - CI/CD Pipeline to automatically deploy the certificate in your web server.
 - [ ] Add client certificate management.
 - [ ] ?
 

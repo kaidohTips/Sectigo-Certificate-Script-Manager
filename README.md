@@ -120,7 +120,7 @@ The primary administrator privileges and restrictions are divided as follows:
    ```
 3. Enjoy !
    ```sh
-   python3 scsm.py info yoursite@domain.com
+   poetry run python scsm.py {command} {yoursite@domain.com}
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

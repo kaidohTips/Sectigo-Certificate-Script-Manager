@@ -32,15 +32,6 @@ import pendulum
 import time
 
 
-load_dotenv()
-
-HEADERS = {
-        'login': os.environ.get("SECTIGO_USER"),
-        'Content-Type': 'application/json;charset=utf-8',
-        'customerUri': os.environ.get("SECTIGO_CUSTOMER_URI"),
-        'password': os.environ.get("SECTIGO_PASS")
-    }
-
 with yaspin() as sp:
     time.sleep(1)
 
@@ -208,80 +199,78 @@ def CreationCertificate(server: str, size, csr_path: str | os.PathLike, key_path
 			else:
 				sp.fail("")
 
+if __name__ == "__main__":
+    load_dotenv()
 
-parser = argparse.ArgumentParser(description="Tools to manage certificate issued from SECTIGO",
-                                 epilog="@kaidohTips",
-                                 formatter_class=argparse.RawTextHelpFormatter)
-
-subparsers = parser.add_subparsers()
-
-parser_bind = subparsers.add_parser("bind",help="test de connectivity with the SECTIGO API")
-
-parser_renew = subparsers.add_parser("renew",help="Renew the certificate")
-parser_renew.add_argument("fqdn",type=str,metavar="FQDN",help="FQDN to renew",nargs="+")
-parser_renew.add_argument("--overwrite","-o",action="store_true",help="Bypass Prompt")
-
-parser_info = subparsers.add_parser("info", help="Display information of the current certificate")
-parser_info.add_argument("fqdn",type=str,metavar="FQDN",help="FQDN of the certificate to display",nargs="+")
-
-parser_download = subparsers.add_parser("download", help="Download certificates (x509CO, x509IOR and x509co)")
-parser_download.add_argument("fqdn", type=str,metavar="Destination Server",help="Server where you want to download the certificate")
-parser_download.add_argument("--format", "-f", type=str, metavar="format",help="Format",default=["x509","x509CO","x509IOR"],nargs="+")
-parser_download.add_argument("--path", "-p", type=str, metavar="DOWNLOAD PATH",help="Path where you'll store your downloaded certificates")
-
-parser_create = subparsers.add_parser("create",help="Create a certificate")
-parser_create.add_argument("fqdn",type=str,help="FQDN Full Qualified Distingued Name")
-parser_create.add_argument("--size",type=str,help="Size of RSA key",default="4096")
-parser_create.add_argument("orgid",type=str,help="OrgID of your domain",default=os.environ.get("SECTIGO_ORG_ID"))
-parser_create.add_argument("cert_type",type=str,help="CertType ID of your domain",default=os.environ.get("SECTIGO_CERT_TYPE_ID"))
-parser_create.add_argument("--csr_path",type=str,help="Path CRT")
-parser_create.add_argument("--key_path",type=str,help="Path KEY")
-parser_create.add_argument("--term",type=str,help="Term (days)",default="365")
-parser_create.add_argument("--SubjectAlternativeNames","--san",type=list[str],help="Subject Alternatives Names of your certificates")
-
-parser_update = subparsers.add_parser("update",help="Update a certificate")
-parser_update.add_argument("fqdn", type=str, help="FQDN Full Qualified Distingued Name")
-parser_update.add_argument("--term", type=int, help="Term (in days)")
-parser_update.add_argument("--certTypeId", type=int, help="Certificate Profile ID", nargs="+")
-parser_update.add_argument("--orgId", type=int, help="Organization ID")
-parser_update.add_argument("--commonName", type=str, metavar="COMMON_NAME", help="Certificate common name")
-parser_update.add_argument("--csr", type=str, metavar="CSR", help="Certificate signing request")
-parser_update.add_argument("--externalRequester", type=str, help="External requester emails, comma-separated")
-parser_update.add_argument("--comments", type=str, metavar="REASON", help="Comments", nargs="?")
-parser_update.add_argument("--subjectAlternativeNames","--san", type=list[str], metavar="SUBJECT ALTERNATIVE NAMES", help="Subject alternative names", nargs="+")
-
-options = parser.parse_args()
+    HEADERS = {
+            'login': os.environ.get("SECTIGO_USER"),
+            'Content-Type': 'application/json;charset=utf-8',
+            'customerUri': os.environ.get("SECTIGO_CUSTOMER_URI"),
+            'password': os.environ.get("SECTIGO_PASS")
+        }
 
 
-print("""
-  █████████    █████████   █████████  ██████   ██████
- ███░░░░░███  ███░░░░░███ ███░░░░░███░░██████ ██████ 
-░███    ░░░  ███     ░░░ ░███    ░░░  ░███░█████░███ 
-░░█████████ ░███         ░░█████████  ░███░░███ ░███ 
- ░░░░░░░░███░███          ░░░░░░░░███ ░███ ░░░  ░███ 
- ███    ░███░░███     ███ ███    ░███ ░███      ░███ 
-░░█████████  ░░█████████ ░░█████████  █████     █████
- ░░░░░░░░░    ░░░░░░░░░   ░░░░░░░░░  ░░░░░     ░░░░░ 
- 
- """)
+    parser = argparse.ArgumentParser(description="Tools to manage certificate issued from SECTIGO",
+                                     epilog="@kaidohTips",
+                                     formatter_class=argparse.RawTextHelpFormatter)
 
-if len(sys.argv) > 1:
-    if sys.argv[1] == 'renew':
-        RenewCertificate(options.fqdn)
+    subparsers = parser.add_subparsers()
 
-    elif sys.argv[1] == 'bind':
-        BindAPI()
+    parser_bind = subparsers.add_parser("bind",help="test de connectivity with the SECTIGO API")
 
-    elif sys.argv[1] == 'info':
-        DisplayInfo(options.fqdn)
+    parser_renew = subparsers.add_parser("renew",help="Renew the certificate")
+    parser_renew.add_argument("fqdn",type=str,metavar="FQDN",help="FQDN to renew",nargs="+")
+    parser_renew.add_argument("--overwrite","-o",action="store_true",help="Bypass Prompt")
 
-    elif sys.argv[1] == 'download':
-        DownloadCerts(options.fqdn,options.format, options.path)
+    parser_info = subparsers.add_parser("info", help="Display information of the current certificate")
+    parser_info.add_argument("fqdn",type=str,metavar="FQDN",help="FQDN of the certificate to display",nargs="+")
 
-    elif sys.argv[1] == 'update':
-        UpdateCertificate(options.fqdn, **vars(options))
+    parser_download = subparsers.add_parser("download", help="Download certificates (x509CO, x509IOR and x509co)")
+    parser_download.add_argument("fqdn", type=str,metavar="Destination Server",help="Server where you want to download the certificate")
+    parser_download.add_argument("--format", "-f", type=str, metavar="format",help="Format",default=["x509","x509CO","x509IOR"],nargs="+")
+    parser_download.add_argument("--path", "-p", type=str, metavar="DOWNLOAD PATH",help="Path where you'll store your downloaded certificates")
 
-    elif sys.argv[1] == 'create':
-        CreationCertificate(options.fqdn, options.size, options.csr_path, options.key_path, options.term, options.san, options.country, options.state, options.city)
-else:
-    parser.print_help()
+    parser_create = subparsers.add_parser("create",help="Create a certificate")
+    parser_create.add_argument("fqdn",type=str,help="FQDN Full Qualified Distingued Name")
+    parser_create.add_argument("--size",type=str,help="Size of RSA key",default="4096")
+    parser_create.add_argument("orgid",type=str,help="OrgID of your domain",default=os.environ.get("SECTIGO_ORG_ID"))
+    parser_create.add_argument("cert_type",type=str,help="CertType ID of your domain",default=os.environ.get("SECTIGO_CERT_TYPE_ID"))
+    parser_create.add_argument("--csr_path",type=str,help="Path CRT")
+    parser_create.add_argument("--key_path",type=str,help="Path KEY")
+    parser_create.add_argument("--term",type=str,help="Term (days)",default="365")
+    parser_create.add_argument("--SubjectAlternativeNames","--san",type=list[str],help="Subject Alternatives Names of your certificates")
+
+    parser_update = subparsers.add_parser("update",help="Update a certificate")
+    parser_update.add_argument("fqdn", type=str, help="FQDN Full Qualified Distingued Name")
+    parser_update.add_argument("--term", type=int, help="Term (in days)")
+    parser_update.add_argument("--certTypeId", type=int, help="Certificate Profile ID", nargs="+")
+    parser_update.add_argument("--orgId", type=int, help="Organization ID")
+    parser_update.add_argument("--commonName", type=str, metavar="COMMON_NAME", help="Certificate common name")
+    parser_update.add_argument("--csr", type=str, metavar="CSR", help="Certificate signing request")
+    parser_update.add_argument("--externalRequester", type=str, help="External requester emails, comma-separated")
+    parser_update.add_argument("--comments", type=str, metavar="REASON", help="Comments", nargs="?")
+    parser_update.add_argument("--subjectAlternativeNames","--san", type=list[str], metavar="SUBJECT ALTERNATIVE NAMES", help="Subject alternative names", nargs="+")
+
+    options = parser.parse_args()
+
+
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'renew':
+            RenewCertificate(options.fqdn)
+
+        elif sys.argv[1] == 'bind':
+            BindAPI()
+
+        elif sys.argv[1] == 'info':
+            DisplayInfo(options.fqdn)
+
+        elif sys.argv[1] == 'download':
+            DownloadCerts(options.fqdn,options.format, options.path)
+
+        elif sys.argv[1] == 'update':
+            UpdateCertificate(options.fqdn, **vars(options))
+
+        elif sys.argv[1] == 'create':
+            CreationCertificate(options.fqdn, options.size, options.csr_path, options.key_path, options.term, options.san, options.country, options.state, options.city)
+    else:
+        parser.print_help()

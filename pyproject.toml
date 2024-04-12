@@ -5,6 +5,7 @@ description = "Dependencies required for SCSM."
 authors = ["Kaidoh"]
 license = "GPL"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"

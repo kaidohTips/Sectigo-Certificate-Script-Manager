@@ -32,9 +32,6 @@ import pendulum
 import time
 
 
-with yaspin() as sp:
-    time.sleep(1)
-
 def GetId(server: str) -> str:
     try:
         response = requests.get("https://cert-manager.com/api/ssl/v1", headers=HEADERS, params={'commonName': server})
